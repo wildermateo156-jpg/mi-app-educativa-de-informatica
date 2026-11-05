@@ -101,6 +101,19 @@
       }
     });
 
+    // Foto en las cabeceras que no usan data-tp="photo"
+    if (p.photoUrl) {
+      document.querySelectorAll('img[alt="Profile"]').forEach(el => { el.src = p.photoUrl; });
+      document.querySelectorAll('div.w-8.h-8.rounded-full.bg-primary').forEach(el => {
+        if (el.querySelector('img') || !el.querySelector('.material-symbols-outlined')) return;
+        el.innerHTML = '';
+        const im = document.createElement('img');
+        im.src = p.photoUrl; im.alt = p.name;
+        im.className = 'w-8 h-8 rounded-full object-cover';
+        el.appendChild(im);
+      });
+    }
+
     return p;
   }
 
